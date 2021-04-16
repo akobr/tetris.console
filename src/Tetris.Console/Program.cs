@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Text;
+
 using SystemConsole = System.Console;
 
 namespace Tetris.Console
@@ -21,6 +22,27 @@ namespace Tetris.Console
             state[2, 1] = true;
             state[2, 2] = true;
             state[2, 3] = false;
+
+            SystemConsole.WriteLine();
+            SystemConsole.WriteLine(" █ ");
+            SystemConsole.WriteLine(" ███ ");
+            SystemConsole.WriteLine("   █ ");
+            SystemConsole.WriteLine();
+            SystemConsole.WriteLine("  ██");
+            SystemConsole.WriteLine("  █ ");
+            SystemConsole.WriteLine(" ██ ");
+            SystemConsole.WriteLine();
+
+            SystemConsole.WriteLine();
+            SystemConsole.WriteLine(" ██ ");
+            SystemConsole.WriteLine(" ██████ ");
+            SystemConsole.WriteLine("     ██ ");
+            SystemConsole.WriteLine();
+            SystemConsole.WriteLine("   ████ ");
+            SystemConsole.WriteLine("   ██ ");
+            SystemConsole.WriteLine(" ████ ");
+            SystemConsole.WriteLine();
+
 
             BrickManager brickManager = new BrickManager();
             short iBrick = brickManager.AllBricks[1].States[1];
