@@ -26,13 +26,14 @@ namespace Tetris.Console
             if (brick == null)
             {
                 SpawnNewBrick();
+                return;
             }
 
             TryDrop();
 
             if (IsBrickSettled())
             {
-                gameState.Fill(brickState, brickPosition);
+                gameState.Fill(brickState, brickPosition, brick.Colour);
                 brick = null;
             }
         }

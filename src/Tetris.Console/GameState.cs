@@ -6,8 +6,10 @@ namespace Tetris.Console
 {
     public class GameState
     {
-        // 20 * 10 = 200 / 8 = 25 bytes
+        // 20 * 10 = 200 / 8 = 25 bytes for entire game state (without colours)
         private BitArray bits;
+        private Color[,] colours;
+
         private int rowCount;
         private int columnCount;
 
@@ -16,6 +18,13 @@ namespace Tetris.Console
             this.rowCount = rowCount > 0 ? rowCount : throw new ArgumentOutOfRangeException(nameof(rowCount));
             this.columnCount = columnCount > 0 ? columnCount : throw new ArgumentOutOfRangeException(nameof(columnCount));
             bits = new BitArray(rowCount * columnCount);
+            colours = new Color[rowCount, columnCount];
+        }
+
+        public Color GetColour(int rowIndex, int columnIndex)
+        {
+            CheckBounds(rowIndex, columnIndex);
+            return colours[rowIndex, columnIndex];
         }
 
         public bool Get(int rowIndex, int columnIndex)
@@ -65,7 +74,7 @@ namespace Tetris.Console
             return view;
         }
 
-        public void Fill(short mask, Point position)
+        public void Fill(short mask, Point position, Color colour)
         {
             if (!position.IsValidPosition())
             {
@@ -81,7 +90,9 @@ namespace Tetris.Console
             {
                 for (int c = 0; c < GameConstants.BRICK_SIZE; c++)
                 {
-                    bits[new Point(startRowIndex + r, startColumnIndex + c).ToFlatIndex()] = bitsOfMask[new Point(r, c).ToFlatIndex()];
+                    Point gamePosition = new Point(startRowIndex + r, startColumnIndex + c);
+                    bits[gamePosition.ToFlatIndex()] = bitsOfMask[new Point(r, c).ToFlatIndex()];
+                    colours[gamePosition.X, gamePosition.Y] = colour;
                 }
             }
         }
@@ -90,11 +101,12 @@ namespace Tetris.Console
         {
             if (rowIndex < 0 || rowIndex >= rowCount)
             {
-                throw new IndexOutOfRangeException();
+                throw new IndexOutOfRangeException(nameof(rowIndex));
             }
+
             if (columnIndex < 0 || columnIndex >= columnCount)
             {
-                throw new IndexOutOfRangeException();
+                throw new IndexOutOfRangeException(nameof(columnIndex));
             }
         }
     }
