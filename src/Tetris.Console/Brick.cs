@@ -3,12 +3,16 @@ using System.Drawing;
 
 namespace Tetris.Console
 {
-    public class Brick
+    public class Brick : IBrick
     {
-        public Brick(Color colour, params short[] states)
+        public Brick(BrickType type, Color colour, params short[] states)
         {
+            Type = type;
+            Colour = colour;
             States = states;
         }
+
+        public BrickType Type { get; }
 
         public Color Colour { get; }
 

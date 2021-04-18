@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-using SystemConsole = System.Console;
+﻿using SystemConsole = System.Console;
 
 namespace Tetris.Console
 {
-    public class AnsiConsole
+    public class AnsiConsole : IAnsiConsole
     {
         private const string EscapeCharacter = "\u001b";
 
